@@ -1,0 +1,39 @@
+input[type=text] {
+    width: 70%;
+}
+
+li.completed-true {
+    text-decoration: line-through;
+    color: darkgray;
+    list-style: disc inside;
+}
+
+li.instructions {
+    list-style: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+.disappear {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.reappear{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s linear;
+}
+
+.active-false {
+    pointer-events: none;
+    cursor: default;
+    color: darkgray;
+}
+
+[ng-click] {
+    cursor: pointer;
+}

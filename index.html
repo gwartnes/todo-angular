@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="todoList">
+    <head>
+        <!--
+            Author: Seth Gwartney
+        -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+        <script src="js/todo-list.js"></script>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+        <link rel="stylesheet" href="css/site.css" />        
+    </head>
+    <body>
+        <div class="container" ng-controller="TodoController">
+            <h1>Todo List</h1>
+            <header class="row">
+                <form class="six columns offset-by-three" ng-submit="add()">
+                    <input class="eight columns" type="text" placeholder="What do you need to do?" ng-model="newTodo.text"/>
+                    <input class="button-primary four columns" type="submit" value="Add" />
+                </form>
+            </header>
+            <section class="row">
+                <ul class="six columns offset-by-three">
+                    <div ng-repeat="todo in todos | filter:whatToShow">
+                        <li class="eleven columns completed-{{todo.completed}}" title="{{todo.completed ? dateCompletedPretty(todo) : 'Click to complete'}}" ng-click="complete(todo)">
+                            <span class="completed-{{todo.completed}}">{{todo.text}}</span>
+                        </li>
+                        <a class="one column" href="" title="Delete {{todo.text}}?" ng-click="delete(todo)">X</a>
+                    </div>
+                    <li class="twelve columns instructions {{remaining() > 0 || unarchived() == 0 ? 'disappear' : 'reappear'}}">
+                        Click or tap an item to mark it as completed.
+                    </li>
+                </ul>
+            </section>
+            <div class="row">
+                <div class="six columns offset-by-three">
+                    <span>{{remaining()}} / {{unarchived()}} completed | <a href="" ng-click="archive()" class="active-{{remaining() > 0}}">Archive Completed Tasks</a></span>
+                </div>
+            </div> 
+            <footer class="row">         
+                <div class="six columns offset-by-three">
+                    <button class="six columns" ng-click="toggleArchived()">{{archivedShowing ? "Hide" : "Show"}} Archived</button>
+                    <button class="six columns" ng-click="toggleCompleted()">{{completedShowing ? "Hide" : "Show"}} Completed</button>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

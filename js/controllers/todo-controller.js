@@ -1,5 +1,5 @@
-angular.module('todoList', ["services"])
-    .controller('TodoController', ["$scope", "formatDate", function TodoController($scope, formatDate){
+angular.module('todoList', ["filters"])
+    .controller('TodoController', ["$scope", function TodoController($scope){
         // initialize objects
         $scope.todos = [];
         $scope.newTodo = {};
@@ -16,10 +16,8 @@ angular.module('todoList', ["services"])
             }
             $scope.newTodo.completed = false;
             $scope.newTodo.archived = false;
-            console.log($scope.newTodo);
             $scope.todos.push($scope.newTodo);
             $scope.newTodo = {};
-            console.log($scope.todos);
         };
 
         // archive all completed todos (just a flag on the todo object)
@@ -46,7 +44,7 @@ angular.module('todoList', ["services"])
         }
 
         // external service for pretty formatting of dates
-        $scope.formatDate = formatDate;
+       // $scope.formatDate = formatDate;
 
         // return the css class pertaining to whether there are items remaining or any unarchived items
         $scope.remainingOrUnarchivedCss = function() {

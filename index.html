@@ -5,7 +5,7 @@
             Author: Seth Gwartney
         -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-        <script src="js/services/format-date.js"></script>
+        <script src="js/filters/format-date.js"></script>
         <script src="js/controllers/todo-controller.js"></script>
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' type='text/css'>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
@@ -23,7 +23,7 @@
             <section class="row">
                 <ul class="six columns offset-by-three">
                     <div ng-repeat="todo in todos | filter:whatToShow">
-                        <li ng-class="{eleven: true, columns: true, completed: todo.completed}" title="{{todo.completed ? formatDate(todo.dateCompleted) : 'Click to complete'}}" ng-click="complete(todo)">
+                        <li ng-class="{eleven: true, columns: true, completed: todo.completed}" title="{{todo.dateCompleted | formatDate}}" ng-click="complete(todo)">
                             {{todo.text}}
                         </li>
                         <a class="one column" href="" title="Delete {{todo.text}}?" ng-click="delete(todo)">X</a>

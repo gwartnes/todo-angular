@@ -1,8 +1,8 @@
-angular.module("services", [])
-    .factory("formatDate", function(){
+angular.module("filters", [])
+    .filter("formatDate", function(){
         return function(date) {
             if (!(date instanceof Date)){
-                throw "Not a valid date."
+                return "Click or tap to complete";
             }
 
             var month = date.getMonth() + 1;

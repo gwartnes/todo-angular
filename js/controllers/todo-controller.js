@@ -1,5 +1,5 @@
-angular.module('todoList', [])
-    .controller('TodoController', ["$scope", function TodoController($scope){
+angular.module('todoList', ["services"])
+    .controller('TodoController', ["$scope", "formatDate", function TodoController($scope, formatDate){
         // initialize objects
         $scope.todos = [];
         $scope.newTodo = {};
@@ -40,19 +40,20 @@ angular.module('todoList', [])
             }
         };
 
+        // delete a todo
         $scope.delete = function(todo){
             $scope.todos.splice($scope.todos.indexOf(todo), 1);
         }
 
-        $scope.dateCompletedPretty = function(todo){
-            var date = todo.dateCompleted;
-            return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
-        }
+        // external service for pretty formatting of dates
+        $scope.formatDate = formatDate;
 
-        $scope.remainingAndUnarchivedCss = function() {
+        // return the css class pertaining to whether there are items remaining or any unarchived items
+        $scope.remainingOrUnarchivedCss = function() {
             return $scope.remaining() > 0 || $scope.unarchived() == 0 ? 'disappear' : 'reappear'
         }
 
+        // number of remaining items that aren't completed or archived
         $scope.remaining = function(){
             var count = 0;
             angular.forEach($scope.todos, function(todo){
@@ -63,6 +64,7 @@ angular.module('todoList', [])
             return count;
         };
 
+        // for showing/hiding archived items
         $scope.toggleArchived = function(){
             $scope.archivedShowing = !$scope.archivedShowing;
             if ($scope.archivedShowing){
@@ -73,6 +75,7 @@ angular.module('todoList', [])
             }
         };
 
+        // for showing/hiding completed items
         $scope.toggleCompleted = function(){
             $scope.completedShowing = !$scope.completedShowing;
             if ($scope.completedShowing){
@@ -83,6 +86,7 @@ angular.module('todoList', [])
             }
         };
 
+        // number of items which aren't archived (archived items also implies completed items)
         $scope.unarchived = function(){
             var count = 0;
             angular.forEach($scope.todos, function(todo){

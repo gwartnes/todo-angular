@@ -49,6 +49,10 @@ angular.module('todoList', [])
             return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
         }
 
+        $scope.remainingAndUnarchivedCss = function() {
+            return $scope.remaining() > 0 || $scope.unarchived() == 0 ? 'disappear' : 'reappear'
+        }
+
         $scope.remaining = function(){
             var count = 0;
             angular.forEach($scope.todos, function(todo){

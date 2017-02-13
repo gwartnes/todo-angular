@@ -22,19 +22,19 @@
             <section class="row">
                 <ul class="six columns offset-by-three">
                     <div ng-repeat="todo in todos | filter:whatToShow">
-                        <li class="eleven columns completed-{{todo.completed}}" title="{{todo.completed ? dateCompletedPretty(todo) : 'Click to complete'}}" ng-click="complete(todo)">
-                            <span class="completed-{{todo.completed}}">{{todo.text}}</span>
+                        <li ng-class="{eleven: true, columns: true, completed: todo.completed}" title="{{todo.completed ? dateCompletedPretty(todo) : 'Click to complete'}}" ng-click="complete(todo)">
+                            {{todo.text}}
                         </li>
                         <a class="one column" href="" title="Delete {{todo.text}}?" ng-click="delete(todo)">X</a>
                     </div>
-                    <li class="twelve columns instructions {{remaining() > 0 || unarchived() == 0 ? 'disappear' : 'reappear'}}">
+                    <li ng-class="['twelve', 'columns', 'instructions', remainingAndUnarchivedCss()]">
                         Click or tap an item to mark it as completed.
                     </li>
                 </ul>
             </section>
             <div class="row">
                 <div class="six columns offset-by-three">
-                    <span>{{remaining()}} / {{unarchived()}} completed | <a href="" ng-click="archive()" class="active-{{remaining() > 0}}">Archive Completed Tasks</a></span>
+                    <span>{{remaining()}} / {{unarchived()}} completed | <a href="" ng-click="archive()" ng-class="{inactive: remaining() === 0}">Archive Completed Tasks</a></span>
                 </div>
             </div> 
             <footer class="row">         

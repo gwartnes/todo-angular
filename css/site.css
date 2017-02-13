@@ -2,7 +2,7 @@ input[type=text] {
     width: 70%;
 }
 
-li.completed-true {
+li.completed {
     text-decoration: line-through;
     color: darkgray;
     list-style: disc inside;
@@ -28,7 +28,7 @@ h1 {
     transition: opacity 1s linear;
 }
 
-.active-false {
+a.inactive {
     pointer-events: none;
     cursor: default;
     color: darkgray;
